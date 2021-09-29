@@ -1,0 +1,47 @@
+/*
+Just binary search the problem away
+*/
+#include <bits/stdc++.h>
+#define for_n(i,a,n) for (int i=a;i<n;i++)
+#define maxim(a,b) a=max(a,b)
+#define f first
+#define s second
+#define ll long long
+#define all(x) x.begin(), x.end()
+#define pii pair<int,int>
+#define vi vector<int>
+using namespace std;
+
+void setIO(string name=""){
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	if (name.size()!=0){
+		freopen((name+".in").c_str(),"r",stdin);
+		freopen((name+".out").c_str(),"w",stdout);
+	}
+} 
+
+int main(){
+	setIO();
+	int n,m;
+	cin>>n>>m;
+	vector<int> cities(n);
+	vector<int> towers(m);
+	for(auto& i:cities)cin>>i;
+	for(auto& i:towers)cin>>i;
+	int min_r = 0;
+	for (auto i:cities){
+		int l=0;
+		int r=m-1;
+		while (r-l>1){
+			if (towers[(l+r)/2]>=i){
+				r = (l+r)/2;
+			}
+			else if (towers[(l+r)/2]<i){
+				l = (l+r)/2;
+			}
+		}
+		min_r = max(min_r,min(abs(i-towers[l]),abs(towers[r]-i)));
+	}
+	cout<<min_r<<'\n';
+}
