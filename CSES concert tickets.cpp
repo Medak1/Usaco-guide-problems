@@ -35,24 +35,9 @@ int main(){
             cout<<-1<<'\n';
             continue;
         }
-        auto ans_ptr = tickets.lower_bound(price);
-        if (ans_ptr==tickets.end()){
-            ans_ptr--;
-            if (ans_ptr->f<price){
-                cout<<ans_ptr->f<<'\n';
-                tickets[ans_ptr->f]--;
-                if (ans_ptr->s==0)tickets.erase(ans_ptr->f);
-            }
-            else{
-                cout<<-1<<'\n';
-            }
-        }
-        else if (ans_ptr->f==price){
-            cout<<price<<'\n';
-            tickets[price]--;
-            if (tickets[price]==0)tickets.erase(price);
-        }
-        else if (ans_ptr==tickets.begin())cout<<-1<<'\n';
+        auto ans_ptr = tickets.upper_bound(price);
+        
+        if (ans_ptr==tickets.begin())cout<<-1<<'\n';
         else{
             
             ans_ptr--;
